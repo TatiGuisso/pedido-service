@@ -1,10 +1,13 @@
 package com.grupo16.pedidoservice.domain;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Builder
+@Getter
+@AllArgsConstructor
 public class Pedido {
-
-	//TODO: implementar
-	
+	private Long id;
+	private Status status;
+	private Carrinho carrinho;
+	private String pagamentoExternoId;
 }
