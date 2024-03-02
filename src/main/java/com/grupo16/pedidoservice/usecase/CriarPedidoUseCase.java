@@ -1,14 +1,11 @@
 package com.grupo16.pedidoservice.usecase;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.grupo16.pedidoservice.domain.Carrinho;
 import com.grupo16.pedidoservice.domain.Estoque;
 import com.grupo16.pedidoservice.domain.Item;
 import com.grupo16.pedidoservice.domain.Pedido;
-import com.grupo16.pedidoservice.domain.Produto;
 import com.grupo16.pedidoservice.domain.Status;
 import com.grupo16.pedidoservice.exception.EstoqueInsuficienteException;
 import com.grupo16.pedidoservice.gateway.CarrinhoServiceGateway;
@@ -41,7 +38,13 @@ public class CriarPedidoUseCase {
 		
 		Pedido novoPedido = new Pedido(null, Status.CRIADO, carrinho, pagamentoExternoId);
 		
-		return pedidoRepositoryGateway.criar(novoPedido);
+		Long pedidoId = pedidoRepositoryGateway.criar(novoPedido);
+		
+		carrinhoServiceGateway.inativar(carrinhoId);
+		
+		return pedidoId;
+		
+		
 	}
 
 	private void verificaEstoque(Carrinho carrinho) {
@@ -56,5 +59,4 @@ public class CriarPedidoUseCase {
 			throw new EstoqueInsuficienteException();
 		}
 	}
-	
 }

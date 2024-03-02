@@ -6,4 +6,6 @@ public interface CarrinhoServiceGateway {
 
 	Carrinho obterPorId(long carrinhoId);
 
+	void inativar(long carrinhoId);
+
 }
