@@ -13,10 +13,12 @@ import com.grupo16.pedidoservice.gateway.EstoqueServiceGateway;
 import com.grupo16.pedidoservice.gateway.PagamentoServiceGateway;
 import com.grupo16.pedidoservice.gateway.PedidoRepositoryGateway;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class CriarPedidoUseCase {
 
 	private CarrinhoServiceGateway carrinhoServiceGateway;
@@ -27,7 +29,7 @@ public class CriarPedidoUseCase {
 	
 	private PedidoRepositoryGateway pedidoRepositoryGateway;
 	
-	public Long criar(long carrinhoId) {
+	public Long criar(long carrinhoId, long usuarioId) {
 		Carrinho carrinho =  carrinhoServiceGateway.obterPorId(carrinhoId);
 		
 		verificaEstoque(carrinho);
@@ -36,7 +38,7 @@ public class CriarPedidoUseCase {
 		
 		String pagamentoExternoId = pagamentoServiceGateway.criarPagamento(carrinho);
 		
-		Pedido novoPedido = new Pedido(null, Status.CRIADO, carrinho, pagamentoExternoId);
+		Pedido novoPedido = new Pedido(null, usuarioId, Status.CRIADO, carrinho, pagamentoExternoId);
 		
 		Long pedidoId = pedidoRepositoryGateway.criar(novoPedido);
 		

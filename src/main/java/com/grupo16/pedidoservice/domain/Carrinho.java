@@ -13,6 +13,7 @@ import lombok.ToString;
 public class Carrinho {
 	private Long id;
 	private List<Item> itens;
+	private BigDecimal valorTotal;
 	
 	public List<Produto> getProdutos(){
 		return itens.stream().map(Item::getProduto).toList();

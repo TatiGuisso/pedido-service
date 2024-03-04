@@ -26,7 +26,7 @@ public class PedidoController {
 			@RequestBody PedidoJson pedidoJson) {
 		log.trace("Start pedidoJson={}", pedidoJson);
 		
-		Long pedidoId = criarPedidoUseCase.criar(pedidoJson.getCarrinhoId());
+		Long pedidoId = criarPedidoUseCase.criar(pedidoJson.getCarrinhoId(), idUsuario);
 		
 		log.trace("End pedidoId={}", pedidoId);
 		return pedidoId;
