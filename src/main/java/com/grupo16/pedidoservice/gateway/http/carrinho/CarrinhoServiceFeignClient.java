@@ -10,6 +10,6 @@ import com.grupo16.pedidoservice.gateway.http.carrinho.json.CarrinhoJson;
 public interface CarrinhoServiceFeignClient {
 
 	@GetMapping("{id}")
-	CarrinhoJson obterPorId(@PathVariable Long id);
+	CarrinhoJson obterPorId(@PathVariable(value = "id") Long id);
 	
 }
