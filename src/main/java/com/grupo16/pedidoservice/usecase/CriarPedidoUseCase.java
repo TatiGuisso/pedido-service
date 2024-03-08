@@ -45,8 +45,6 @@ public class CriarPedidoUseCase {
 		carrinhoServiceGateway.inativar(carrinhoId);
 		
 		return pedidoId;
-		
-		
 	}
 
 	private void verificaEstoque(Carrinho carrinho) {

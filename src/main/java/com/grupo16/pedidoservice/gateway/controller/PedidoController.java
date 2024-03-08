@@ -1,5 +1,7 @@
 package com.grupo16.pedidoservice.gateway.controller;
 
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.pedidoservice.gateway.controller.json.PedidoJson;
+import com.grupo16.pedidoservice.usecase.ConcluirPedidoUseCase;
 import com.grupo16.pedidoservice.usecase.CriarPedidoUseCase;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +23,8 @@ public class PedidoController {
 	
 	private CriarPedidoUseCase criarPedidoUseCase;
 	
+	private ConcluirPedidoUseCase concluirPedidoUseCase;
+	
 	@PostMapping()
 	public Long salvar(
 			@RequestHeader(name = "idUsuario") Long idUsuario,
@@ -31,6 +36,15 @@ public class PedidoController {
 		log.trace("End pedidoId={}", pedidoId);
 		return pedidoId;
 		
+	}
+	
+	@PatchMapping("{id}/concluir")
+	public void concluir(@PathVariable(value = "id") Long id) {
+		log.trace("Start id={}", id);
+		
+		concluirPedidoUseCase.concluir(id);
+		
+		log.trace("End");
 	}
 
 }
