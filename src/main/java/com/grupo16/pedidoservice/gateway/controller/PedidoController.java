@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.pedidoservice.gateway.controller.json.PedidoJson;
+import com.grupo16.pedidoservice.usecase.CancelarPedidoUseCase;
 import com.grupo16.pedidoservice.usecase.ConcluirPedidoUseCase;
 import com.grupo16.pedidoservice.usecase.CriarPedidoUseCase;
 
@@ -24,6 +25,8 @@ public class PedidoController {
 	private CriarPedidoUseCase criarPedidoUseCase;
 	
 	private ConcluirPedidoUseCase concluirPedidoUseCase;
+	
+	private CancelarPedidoUseCase cancelarPedidoUseCase;
 	
 	@PostMapping()
 	public Long salvar(
@@ -43,6 +46,15 @@ public class PedidoController {
 		log.trace("Start id={}", id);
 		
 		concluirPedidoUseCase.concluir(id);
+		
+		log.trace("End");
+	}
+	
+	@PatchMapping("{id}/cancelar")
+	public void cancelar(@PathVariable(value = "id") Long id) {
+		log.trace("Start id={}", id);
+		
+		cancelarPedidoUseCase.cancelar(id);
 		
 		log.trace("End");
 	}

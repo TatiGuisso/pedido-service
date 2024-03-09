@@ -21,6 +21,10 @@ public class Pedido {
 	};
 	
 	public void concluir() {
-		status = Status.CONCLUIR;
+		status = Status.CONCLUIDO;
+	}
+	
+	public void cancelar() {
+		status = Status.CANCELADO;
 	}
 }
