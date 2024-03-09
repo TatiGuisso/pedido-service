@@ -4,6 +4,6 @@ import com.grupo16.pedidoservice.domain.Carrinho;
 
 public interface PagamentoServiceGateway {
 
-	String criarPagamento(Carrinho carrinho);
+	Long criarPagamento(Long pedidoId, Carrinho carrinho);
 
 }

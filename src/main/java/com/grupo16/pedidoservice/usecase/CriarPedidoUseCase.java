@@ -36,11 +36,9 @@ public class CriarPedidoUseCase {
 		
 		estoqueServiceGateway.reservaEstoque(carrinho);
 		
-		String pagamentoExternoId = pagamentoServiceGateway.criarPagamento(carrinho);
+		Long pedidoId = pedidoRepositoryGateway.criar(new Pedido(null, usuarioId, Status.CRIADO, carrinho));
 		
-		Pedido novoPedido = new Pedido(null, usuarioId, Status.CRIADO, carrinho, pagamentoExternoId);
-		
-		Long pedidoId = pedidoRepositoryGateway.criar(novoPedido);
+		pagamentoServiceGateway.criarPagamento(pedidoId, carrinho);
 		
 		carrinhoServiceGateway.inativar(carrinhoId);
 		

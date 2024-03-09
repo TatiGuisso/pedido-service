@@ -14,7 +14,6 @@ public class Pedido {
 	private Long usuarioId;
 	private Status status;
 	private Carrinho carrinho;
-	private String pagamentoExternoId;
 	
 	public BigDecimal getValorTotal() {
 		return carrinho.getValorTotal();
