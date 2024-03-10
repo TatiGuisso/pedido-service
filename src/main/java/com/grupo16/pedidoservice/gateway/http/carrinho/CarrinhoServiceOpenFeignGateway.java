@@ -61,8 +61,7 @@ public class CarrinhoServiceOpenFeignGateway implements CarrinhoServiceGateway {
 
 	@Override
 	public void inativar(long carrinhoId) {
-		// TODO Implementar
-		
+		carrinhoServiceFeignClient.inativar(carrinhoId);		
 	}
 
 }
