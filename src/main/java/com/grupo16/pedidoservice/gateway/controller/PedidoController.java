@@ -1,8 +1,8 @@
 package com.grupo16.pedidoservice.gateway.controller;
 
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +41,7 @@ public class PedidoController {
 		
 	}
 	
-	@PatchMapping("{id}/concluir")
+	@PutMapping("{id}/concluir")
 	public void concluir(@PathVariable(value = "id") Long id) {
 		log.trace("Start id={}", id);
 		
@@ -50,7 +50,7 @@ public class PedidoController {
 		log.trace("End");
 	}
 	
-	@PatchMapping("{id}/cancelar")
+	@PutMapping("{id}/cancelar")
 	public void cancelar(@PathVariable(value = "id") Long id) {
 		log.trace("Start id={}", id);
 		
