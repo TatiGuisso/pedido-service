@@ -7,11 +7,14 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo16.pedidoservice.domain.Carrinho;
 import com.grupo16.pedidoservice.domain.Estoque;
 import com.grupo16.pedidoservice.domain.Item;
 import com.grupo16.pedidoservice.domain.Produto;
 import com.grupo16.pedidoservice.exception.ErrorAoAcessarEstoqueServiceException;
+import com.grupo16.pedidoservice.exception.SystemBaseException;
+import com.grupo16.pedidoservice.exception.SystemExternalException;
 import com.grupo16.pedidoservice.gateway.EstoqueServiceGateway;
 import com.grupo16.pedidoservice.gateway.http.estoque.json.EstoqueJson;
 
@@ -26,6 +29,8 @@ public class EstoqueServiceOpenFeignGateway implements EstoqueServiceGateway {
 
 	private EstoqueServiceFeignClient estoqueServiceFeignClient;
 
+	private ObjectMapper objectMapper;
+	
 	@Override
 	public Estoque obtemQuantidadeDisponivel(List<Produto> produtos) {
 
@@ -44,12 +49,16 @@ public class EstoqueServiceOpenFeignGateway implements EstoqueServiceGateway {
 			return Estoque.builder().quantidadeDisponivel(qtdDisp).build();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-
 			if(e instanceof FeignException feignException) {
+				try {
+					String exceptionResponseBody = feignException.contentUTF8();
+					SystemBaseException systemBaseException = objectMapper.readValue(exceptionResponseBody, SystemExternalException.class);
+					throw systemBaseException;
 
-				//TODO: implementar
-				String exceptionResponseBody = feignException.contentUTF8();
-				log.error(exceptionResponseBody);
+				} catch (Exception e2) {
+					log.error(e2.getMessage(), e);
+					throw new ErrorAoAcessarEstoqueServiceException();
+				}
 			}
 			throw new ErrorAoAcessarEstoqueServiceException();
 		}
@@ -72,12 +81,16 @@ public class EstoqueServiceOpenFeignGateway implements EstoqueServiceGateway {
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-
 			if(e instanceof FeignException feignException) {
+				try {
+					String exceptionResponseBody = feignException.contentUTF8();
+					SystemBaseException systemBaseException = objectMapper.readValue(exceptionResponseBody, SystemExternalException.class);
+					throw systemBaseException;
 
-				//TODO: implementar
-				String exceptionResponseBody = feignException.contentUTF8();
-				log.error(exceptionResponseBody);
+				} catch (Exception e2) {
+					log.error(e2.getMessage(), e);
+					throw new ErrorAoAcessarEstoqueServiceException();
+				}
 			}
 			throw new ErrorAoAcessarEstoqueServiceException();
 		}
