@@ -11,7 +11,6 @@ import com.grupo16.pedidoservice.domain.Produto;
 import com.grupo16.pedidoservice.exception.ErrorAoAcessarCarrinhoServiceException;
 import com.grupo16.pedidoservice.gateway.CarrinhoServiceGateway;
 import com.grupo16.pedidoservice.gateway.http.carrinho.json.CarrinhoJson;
-import com.grupo16.pedidoservice.gateway.http.carrinho.json.ItemJson;
 
 import feign.FeignException;
 import lombok.AllArgsConstructor;
