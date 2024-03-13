@@ -11,5 +11,7 @@ public interface EstoqueServiceGateway {
 	Estoque obtemQuantidadeDisponivel(List<Produto> produtos);
 
 	void reservaEstoque(Carrinho carrinho);
+	
+	void cancelarReserva(Carrinho carrinho);
 
 }

@@ -48,18 +48,7 @@ public class EstoqueServiceOpenFeignGateway implements EstoqueServiceGateway {
 
 			return Estoque.builder().quantidadeDisponivel(qtdDisp).build();
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			if(e instanceof FeignException feignException) {
-				try {
-					String exceptionResponseBody = feignException.contentUTF8();
-					SystemBaseException systemBaseException = objectMapper.readValue(exceptionResponseBody, SystemExternalException.class);
-					throw systemBaseException;
-
-				} catch (Exception e2) {
-					log.error(e2.getMessage(), e);
-					throw new ErrorAoAcessarEstoqueServiceException();
-				}
-			}
+			tratarExcecao(e);
 			throw new ErrorAoAcessarEstoqueServiceException();
 		}
 
@@ -80,20 +69,38 @@ public class EstoqueServiceOpenFeignGateway implements EstoqueServiceGateway {
 			estoqueServiceFeignClient.reservar(estoqueJsonList);
 
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			if(e instanceof FeignException feignException) {
-				try {
-					String exceptionResponseBody = feignException.contentUTF8();
-					SystemBaseException systemBaseException = objectMapper.readValue(exceptionResponseBody, SystemExternalException.class);
-					throw systemBaseException;
-
-				} catch (Exception e2) {
-					log.error(e2.getMessage(), e);
-					throw new ErrorAoAcessarEstoqueServiceException();
-				}
-			}
-			throw new ErrorAoAcessarEstoqueServiceException();
+			tratarExcecao(e);
 		}
 	}
 
+	@Override
+	public void cancelarReserva(Carrinho carrinho) {
+		try {
+			List<Item> itens = carrinho.getItens();
+			List<EstoqueJson> estoquesJson = itens.stream().map(i -> new EstoqueJson(null, i.getProduto().getId(), i.getQuantidade())).toList();
+			
+			estoqueServiceFeignClient.cancelarReservas(estoquesJson);
+
+		} catch (Exception e) {
+			tratarExcecao(e);
+		}
+		
+	}
+
+	private void tratarExcecao(Exception e) {
+		log.error(e.getMessage(), e);
+		if(e instanceof FeignException feignException) {
+			try {
+				String exceptionResponseBody = feignException.contentUTF8();
+				SystemBaseException systemBaseException = objectMapper.readValue(exceptionResponseBody, SystemExternalException.class);
+				throw systemBaseException;
+
+			} catch (Exception e2) {
+				log.error(e2.getMessage(), e);
+				throw new ErrorAoAcessarEstoqueServiceException();
+			}
+		}
+		throw new ErrorAoAcessarEstoqueServiceException();
+	}
+	
 }

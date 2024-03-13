@@ -51,4 +51,5 @@ public class PagamentoServiceOpenFeignGateway implements PagamentoServiceGateway
 			
 		}
 	}
+
 }

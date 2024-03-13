@@ -67,7 +67,26 @@ public class CarrinhoServiceOpenFeignGateway implements CarrinhoServiceGateway {
 
 	@Override
 	public void inativar(long carrinhoId) {
-		carrinhoServiceFeignClient.inativar(carrinhoId);		
+		
+		try {
+			carrinhoServiceFeignClient.inativar(carrinhoId);		
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			if(e instanceof FeignException feignException) {
+				try {
+					String exceptionResponseBody = feignException.contentUTF8();
+					SystemBaseException systemBaseException = objectMapper.readValue(exceptionResponseBody, SystemExternalException.class);
+					throw systemBaseException;
+
+				} catch (Exception e2) {
+					log.error(e2.getMessage(), e);
+					throw new ErrorAoAcessarCarrinhoServiceException();
+				}
+			}
+			throw new ErrorAoAcessarCarrinhoServiceException();
+		}
+		
 	}
 
 }

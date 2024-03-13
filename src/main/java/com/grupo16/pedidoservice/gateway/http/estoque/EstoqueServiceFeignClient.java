@@ -18,5 +18,8 @@ public interface EstoqueServiceFeignClient {
 	
 	@PutMapping("reserva")
 	void reservar(@RequestBody List<EstoqueJson> estoqueJsonList);
+	
+	@PutMapping("cancelar-reservas")
+	void cancelarReservas(@RequestBody List<EstoqueJson> estoqueJsonList);
 
 }
