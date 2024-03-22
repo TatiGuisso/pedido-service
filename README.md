@@ -74,6 +74,7 @@ curl --location 'http://localhost:8082/pedidos' \
 ```
 2
 ```
+</details>
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
