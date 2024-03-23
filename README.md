@@ -30,9 +30,11 @@ Este microserviço realiza as seguintes etapas:
 
 - Maven: Para build do projeto. **Para buildar:** mvn clean install
 - Foi utilizado Lombok, Validation e MySql, portanto é necessário adicionar os plugins na IDE
-- Antes de iniciar a instância do microserviço Carrinho-Service, é necessário garantir que os seguintes serviços estejam operacionais:
-	* **Service Discovery** 
-	* **API Gateway**
+- Antes de iniciar a instância dos Microserviços, é necessário garantir que os seguintes serviços estejam operacionais para garantir a operação adequada:</br>
+
+	* **Service Discovery** - Inicie o Service Discovery. Execute e verifique se pelo menos uma instância do Service Discovery está operacional.</br></br>
+	
+	* **API Gateway** - Inicie o API Gateway. Verifique se pelo menos uma instância do API Gateway está em execução.
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
