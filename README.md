@@ -102,7 +102,4 @@ curl --location 'http://localhost:8082/pedidos' \
 
 ### Ilustração do MS Pedido Service
 
-![](https://github.com/TatiGuisso/pedido-service/blob/feature/fase5/src/main/java/document/pedido-service.png)
-
-
-
+![pedido-service.png](src%2Fmain%2Fjava%2Fdocument%2Fpedido-service.png)
