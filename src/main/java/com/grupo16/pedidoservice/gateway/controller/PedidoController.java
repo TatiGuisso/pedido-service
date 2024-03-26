@@ -30,11 +30,11 @@ public class PedidoController {
 	
 	@PostMapping()
 	public Long salvar(
-			@RequestHeader(name = "idUsuario") Long idUsuario,
+			@RequestHeader(name = "userId") Long userId,
 			@RequestBody PedidoJson pedidoJson) {
 		log.trace("Start pedidoJson={}", pedidoJson);
 		
-		Long pedidoId = criarPedidoUseCase.criar(pedidoJson.getCarrinhoId(), idUsuario);
+		Long pedidoId = criarPedidoUseCase.criar(pedidoJson.getCarrinhoId(), userId);
 		
 		log.trace("End pedidoId={}", pedidoId);
 		return pedidoId;
