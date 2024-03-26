@@ -59,6 +59,7 @@ Este microserviço realiza as seguintes etapas:
 
 ```
 curl --location 'http://localhost:8082/pedidos' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUm9sZSI6IlVTRVIiLCJ1c2VySWQiOjV9.04nOIr_evkKT41_HB5RcZc-5Zd2dE-X1LruUbn-BQ9A' \
 --header 'idUsuario: 1' \
 --header 'Content-Type: application/json' \
 --data '{
